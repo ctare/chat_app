@@ -14,18 +14,19 @@
       <% else %>
         "localhost:3000/websocket"
       <% end %>
-      ); //ドメインは適宜変える
-  var form = document.getElementById("form");
-  var text_input = document.getElementById("text_input");
-  var msg_box = document.getElementById("msg_box");
+  ) //ドメインは適宜変える
+  var form = $("#form");
+  var text_input = $("#text_input");
+  var msg_box = $("#msg_box");
 
-  form.onsubmit = function(e){
-    dispatcher.trigger("send_message", { msg: text_input.value });
+  form.on("submit", function(e){
+    dispatcher.trigger("send_message", { msg: text_input.val() });
+    text_input.val("");
     e.preventDefault();
-  }
+  });
   dispatcher.bind("spread_message", function(data) {
     var li = document.createElement("li");
     li.textContent = data.msg;
-    msg_box.appendChild(li);
+    msg_box.prepend(li);
   });
 </script>
