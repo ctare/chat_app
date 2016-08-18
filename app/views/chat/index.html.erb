@@ -5,7 +5,7 @@
 <ul id="msg_box">
 </ul>
 <script>
-  var dispatcher = new WebSocketRails("localhost:3000/websocket"); //ドメインは適宜変える
+  var dispatcher = new WebSocketRails("https://special-chat-page.herokuapp.com/websocket"); //ドメインは適宜変える
   var form = document.getElementById("form");
   var text_input = document.getElementById("text_input");
   var msg_box = document.getElementById("msg_box");
