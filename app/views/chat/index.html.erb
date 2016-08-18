@@ -3,6 +3,9 @@
   <input type="submit">
 </form>
 <ul id="msg_box">
+  <% @messages.each do |m| %>
+    <li><%= m.message %></li>
+  <% end %>
 </ul>
 <script>
   var dispatcher = new WebSocketRails(
