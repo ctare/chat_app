@@ -1,2 +1,16 @@
-<h1>Chat#index</h1>
-<p>Find me in app/views/chat/index.html.erb</p>
+<form  id="form">
+  <input type="submit">
+</form>
+
+<script>
+  var dispatcher = new WebSocketRails("localhost:3000/websocket"); //ドメインは適宜変える
+  var form = document.getElementById("form");
+
+  form.onsubmit = function(e){
+    dispatcher.trigger("send_message");
+    e.preventDefault();
+  }
+  dispatcher.bind("spread_message", function(data) {
+    console.log(data.msg);
+  });
+</script>
