@@ -1,12 +1,21 @@
-<form  id="form">
-  <input id="text_input">
-  <input type="submit">
+<form id="form">
+  <div class="form-group">
+    <label for="text_input">message</label>
+    <input id="text_input" class="form-control" placeholder="enter">
+  </div>
 </form>
-<ul id="msg_box">
-  <% @messages.each do |m| %>
-    <li><%= m.message %></li>
-  <% end %>
+
+<hr>
+
+<ul class="list-group">
+  <li class="list-group-item active">chat messages</li>
+  <div id="msg_box">
+    <% @messages.each do |m| %>
+        <li class="list-group-item"><%= m.message %></li>
+    <% end %>
+  </div>
 </ul>
+
 <script>
   var dispatcher = new WebSocketRails(
       <% if Rails.env.production? %>
@@ -20,12 +29,15 @@
   var msg_box = $("#msg_box");
 
   form.on("submit", function(e){
-    dispatcher.trigger("send_message", { msg: text_input.val() });
-    text_input.val("");
+    if(text_input.val()){
+      dispatcher.trigger("send_message", { msg: text_input.val() });
+      text_input.val("");
+    }
     e.preventDefault();
   });
   dispatcher.bind("spread_message", function(data) {
     var li = document.createElement("li");
+    li.setAttribute("class", "list-group-item");
     li.textContent = data.msg;
     msg_box.prepend(li);
   });

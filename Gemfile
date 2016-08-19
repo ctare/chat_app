@@ -51,3 +51,4 @@ end
 
 gem 'websocket-rails'  
 gem 'faye-websocket', '0.10.0'
+gem 'bootstrap-sass'
