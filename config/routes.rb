@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  get 'users/' => 'users#index'
-  get 'users/new'
-  get 'users/show'
+  get 'signs/index'
+
+  get 'signs/login'
+
+  get 'signs/logout'
+
+  resources 'users'
 
   root 'chat#index'
 
